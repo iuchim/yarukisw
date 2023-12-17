@@ -56,9 +56,14 @@ def send_state(state):
     except:
         tm.show('E-02')
         raise
-    if not res.json()['ok']:
+    try:
+        if not res.json()['ok']:
+            raise RuntimeError('text=' + res.text)
+    except:
         tm.show('E-03')
-        raise RuntimeError('text=' + res.text)
+        raise
+    finally:
+        res.close()
     print('send_state: end')
 
 def wait_state_off():

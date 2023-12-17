@@ -40,7 +40,6 @@ app.post('/states/now', async (c) => {
   const timestamp = now.getTime()
   const key = now.toLocaleString('sv-SE', { timeZone: 'Asia/Tokyo' })
     .replace(/[ \-:]/g, '') + ':' + timestamp
-  console.log(`${key}: ${value}`)
   await c.env.state_kv.put(key, value)
   return c.json({ ok: true, timestamp, key, value }, 201)
 })

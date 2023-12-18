@@ -12,7 +12,7 @@ type Bindings = {
 const app = new Hono<{Bindings: Bindings}>()
 
 // Basic 認証
-app.use('/*', async (c, next) => {
+app.use('*', async (c, next) => {
   const auth = basicAuth({
     username: c.env.username,
     password: c.env.password

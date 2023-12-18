@@ -2,5 +2,5 @@ name = "yaruki-server"
 compatibility_date = "2023-01-01"
 
 [[kv_namespaces]]
-binding = ""
+binding = "state_kv"
 id = ""

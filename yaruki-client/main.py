@@ -1,6 +1,6 @@
 import const
 import network
-import urequests
+import requests
 from time import ticks_ms, ticks_diff, sleep_ms
 from machine import Pin
 from tm1637 import TM1637
@@ -37,16 +37,14 @@ def send_state(state):
     res = None
     try:
         print('send_state: url={}, data={}'.format(url, data))
-        res = urequests.post(url, json=data, auth=auth)
+        res = requests.post(url, json=data, auth=auth)
         if not res.json()['ok']:
             raise RuntimeError('text=' + res.text)
+        res.close()
+        wlan.disconnect()
     except:
         tm.show('E-01')
         raise
-    finally:
-        if res is not None:
-            print('send_state: close')
-            res.close()
 
 def wait_state_off():
     if pin_state.value():
